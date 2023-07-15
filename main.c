@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- *
+ * main - the shell loop
  */
 
 int main(void)
@@ -13,7 +13,7 @@ int main(void)
 		read_input(&input);
 		if (input == NULL || input[0] == '\0')
 			break;
-		args = parse_args();
+		args = parse_args(); /* Tokenize the arguments */
 		execute(args);
 	}
 	free(input);

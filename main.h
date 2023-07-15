@@ -11,3 +11,11 @@
 #include <sys/types>
 #include <sys/wait.h>
 #include <sys/stat.h>
+
+/* Shell loop functions */
+
+void read_input(char **input);
+char **parse_args(char *input, char *delim);
+void execute(char **args);
+
+/* */
