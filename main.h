@@ -14,10 +14,8 @@
 
 /* Buffers */
 
-#define MAX_INPUT_SIZE 1024
-#define MAX_ARGS_SIZE 64
-#define MAX_ARGS_NUM 64
+#define tokbBufSize 128
 
 extern char **environ;
-int _delim(char c, char *delim);
-char **parse(char *str, char *x);
+char **parse(char *str);
+
