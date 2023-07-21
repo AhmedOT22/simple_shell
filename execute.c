@@ -10,10 +10,9 @@ int execute(char **args)
 {
 	pid_t pid;
 	int status;
-	char *path, *args[];
+	char *path;
 
-	path = {"/bin/ls"};
-	args[] = {path, "-l", "/usr/", NULL};
+	path = get_path(args[0]);
 
 	pid = fork(); /* Forking a new process */
 
