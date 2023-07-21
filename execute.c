@@ -6,7 +6,7 @@
  * @args: array of the input's arguments
  */
 
-int execute(char **args)
+void execute(char **args)
 {
 	pid_t pid;
 	int status;
@@ -38,4 +38,6 @@ int execute(char **args)
 		perror("Error:");
 		exit(EXIT_FAILURE);
 	}
+	if (_strcmp(path, args[0] != 0)
+		free(path);
 }

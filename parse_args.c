@@ -1,16 +1,18 @@
 #include "main.h"
 
 /**
- * parse - Tokenizes the input string.
- * @inp: Input string.
+ * parse_args - Tokenizes the input string
  *
- * Return: String splitted.
+ * @input: the user input
+ * @delim: the delimeter of strtok
+ *
+ * Return: the token, or NULL if fail
  */
+
 char **parse_args(char *input, *delim)
 {
 	size_t capacity = MAX_ARGS_NUM;
-	char **tokens = malloc(capacity * sizeof(char *));
-	char *token;
+	char *token, **tokens = malloc(capacity * sizeof(char *));
 	int i = 0, j;
 
 	if (tokens == NULL)
@@ -18,15 +20,14 @@ char **parse_args(char *input, *delim)
 		perror(": allocation error\n");
 		exit(EXIT_FAILURE);
 	}
-
 	token = strtok(input, delim);
-
 	while (token != NULL)
 	{
 		if (i == capacity)
 		{
 			capacity += MAX_ARGS_NUM;
 			char **new_tokens = realloc(tokens, capacity * sizeof(char *));
+
 			if (new_tokens == NULL)
 			{
 				perror(": allocation error\n");
@@ -54,11 +55,9 @@ char **parse_args(char *input, *delim)
 			free(tokens);
 			exit(EXIT_FAILURE);
 		}
-
 		token = _strtok(NULL, delim);
 		i++;
 	}
-
 	tokens[i] = NULL;
 	free(tokens[i]);
 	return (tokens);
