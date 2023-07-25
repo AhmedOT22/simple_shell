@@ -18,7 +18,8 @@ char **parse_args(char *input, char *delim)
 	if (tokens == NULL)
 	{
 		perror(": allocation error\n");
-		exit(EXIT_FAILURE);
+		/*exit(EXIT_FAILURE);*/
+		return (NULL);
 	}
 	token = strtok(input, delim);
 	while (token != NULL)
@@ -30,7 +31,8 @@ char **parse_args(char *input, char *delim)
 			for (j = 0; j < i; j++)
 				free(tokens[j]);
 			free(tokens);
-			exit(EXIT_FAILURE);
+			/*exit(EXIT_FAILURE);*/
+			return (NULL);
 		}
 		tokens[i] = new_token;
 		token = strtok(NULL, delim);
@@ -38,13 +40,15 @@ char **parse_args(char *input, char *delim)
 		if (i >= MAX_ARGS_SIZE - 1)
 		{
 			perror(": allocation error\n");
-			exit(EXIT_FAILURE);
+			/*exit(EXIT_FAILURE);*/
+			break;
 		}
 		if (_strlen(new_token) >= MAX_ARGS_SIZE)
 		{
 			perror(": allocation error\n");
 			free(new_token);
-			exit(EXIT_FAILURE);
+			/*exit(EXIT_FAILURE);*/
+			break;
 		}
 	}
 	tokens[i] = NULL;
