@@ -22,6 +22,7 @@ int main(void)
 			free(input);
 			break;
 		}
+		is_exit(args, input);
 		execute(args);
 		for (i = 0; args[i]; i++)
 			free(args[i]);

@@ -9,11 +9,21 @@
 void execute(char **args)
 {
 	pid_t pid;
-	int status;
+	int status, exit_status;
 	char *path;
 
 	path = get_path(args[0]);
 
+	if (_strcmp(args[0], "exit") == 0) /* Handle exit */
+	{
+		if (args[1] != NULL)
+		{
+			exit_status = parse_int(args[1]);
+			exit(exit_status);
+		}
+		else
+			exit(0);
+	}
 	pid = fork(); /* Forking a new process */
 
 	if (pid == 0) /* Child process */
@@ -38,6 +48,6 @@ void execute(char **args)
 		perror("Error:");
 		exit(EXIT_FAILURE);
 	}
-	if (_strcmp(path, args[0] != 0)
+	if (_strcmp(path, args[0]) != 0)
 		free(path);
 }

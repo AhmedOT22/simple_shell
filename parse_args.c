@@ -9,10 +9,10 @@
  * Return: the token, or NULL if fail
  */
 
-char **parse_args(char *input, *delim)
+char **parse_args(char *input, char *delim)
 {
-	size_t capacity = MAX_ARGS_NUM;
-	char *token, **tokens = malloc(capacity * sizeof(char *));
+	char **tokens = (char **)malloc(MAX_ARGS_NUM * sizeof(char *));
+	char *token, *new_token;
 	int i = 0, j;
 
 	if (tokens == NULL)
@@ -23,22 +23,8 @@ char **parse_args(char *input, *delim)
 	token = strtok(input, delim);
 	while (token != NULL)
 	{
-		if (i == capacity)
-		{
-			capacity += MAX_ARGS_NUM;
-			char **new_tokens = realloc(tokens, capacity * sizeof(char *));
-
-			if (new_tokens == NULL)
-			{
-				perror(": allocation error\n");
-				for (j = 0; j < i; j++)
-					free(tokens[j]);
-				free(tokens);
-				exit(EXIT_FAILURE);
-			}
-			tokens = new_tokens;
-		}
-		if (strlen(token) >= MAX_ARGS_SIZE)
+		new_token = _strdup(token);
+		if (new_token == NULL)
 		{
 			perror(": allocation error\n");
 			for (j = 0; j < i; j++)
@@ -46,17 +32,20 @@ char **parse_args(char *input, *delim)
 			free(tokens);
 			exit(EXIT_FAILURE);
 		}
-		tokens[i] = strdup(token);
-		if (tokens[i] == NULL)
-		{
-			perror(": allocation error\n");
-			for (j = 0; j < i; j++)
-				free(tokens[j]);
-			free(tokens);
-			exit(EXIT_FAILURE);
-		}
-		token = _strtok(NULL, delim);
+		tokens[i] = new_token;
+		token = strtok(NULL, delim);
 		i++;
+		if (i >= MAX_ARGS_SIZE - 1)
+		{
+			perror(": allocation error\n");
+			exit(EXIT_FAILURE);
+		}
+		if (_strlen(new_token) >= MAX_ARGS_SIZE)
+		{
+			perror(": allocation error\n");
+			free(new_token);
+			exit(EXIT_FAILURE);
+		}
 	}
 	tokens[i] = NULL;
 	free(tokens[i]);
