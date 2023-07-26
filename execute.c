@@ -25,7 +25,6 @@ void execute(char **args)
 			exit(0);
 	}
 	pid = fork(); /* Forking a new process */
-
 	if (pid == 0) /* Child process */
 	{
 		if (execve(path, args, NULL) == -1)
@@ -45,7 +44,6 @@ void execute(char **args)
 	}
 	else /* Process error*/
 	{
-		perror("Error:");
 		exit(EXIT_FAILURE);
 	}
 	if (_strcmp(path, args[0]) != 0)
